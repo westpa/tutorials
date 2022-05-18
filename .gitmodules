@@ -1,0 +1,3 @@
+[submodule "original_suite/WESTPA1"]
+	path = original_suite/WESTPA1
+	url = git@github.com:westpa/westpa_tutorials
