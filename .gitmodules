@@ -1,10 +1,10 @@
 [submodule "original_suite/WESTPA1"]
 	path = original_suite/WESTPA1
-	url = git@github.com:westpa/westpa_tutorials
+	url = https://github.com/westpa/westpa_tutorials
 [submodule "original_suite/WESTPA2"]
 	path = original_suite/WESTPA2
-	url = git@github.com:westpa/westpa_tutorials
+	url = https://github.com/westpa/westpa_tutorials
 	branch = westpa-2.0-restruct
 [submodule "advanced_tutorials/WESTPA2"]
 	path = advanced_tutorials/WESTPA2
-	url = git@github.com:westpa/westpa2_tutorials
+	url = https://github.com/westpa/westpa2_tutorials
