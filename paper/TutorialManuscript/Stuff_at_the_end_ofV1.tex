@@ -1,0 +1,184 @@
+\begin{comment}
+\newpage
+\onecolumn
+\begin{center}
+\begin{LARGE}
+    \textbf{PROTOCOL FOR RUNNING WE SIMULATIONS}
+\end{LARGE}
+\end{center}
+\renewcommand{\theenumi}{\Roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{(\theenumii)}
+\begin{enumerate}
+\item Ready.
+\begin{enumerate}
+\item \textbf{Organize files into directories.} 
+The initial coordinate file(s) should go in \verb|bstates| and the topology and MD input files should go in \verb|common_files|. 
+In addition, any scripts needed to calculate the progress coordinate should be placed in \verb|common_files|. (p.12)
+\item \textbf{Prepare the system environment.}  
+Edit \verb|env.sh| accordingly for your system environment, i.e. source any files needed to set up the dynamics engine and set variables equal to the full paths of programs (see p. 12). 
+\item \textbf{Specify WE parameters.}  
+In the \verb|west.cfg| file, specify the number of WE iterations that will be carried out, progress coordinate, number of progress coordinate values that will be recorded per iteration, bin spacing, and number of trajectories per bin (see Section 3; Table 2).  
+If a nested coordinate is desired, the bin spacing should be defined in \verb|system.py| (See point 4 on p. 8).  
+The $\tau$ value is specified in the main input file for dynamics propagation (in \verb|common_files/|) through the total number of MD steps.  
+\item \textbf{Set up calculations of auxiliary data.} 
+Decide if you want to store any data that is auxiliary to the progress coordinate and add the corresponding datasets to \verb|west.cfg|.
+\item \textbf{Specify whether to run equilibrium or steady-state WE.}
+Edit the \verb|init.sh| file to include \verb|TSTATE_ARGS| if you plan to run steady-state WE.  
+Also, edit \verb|tstate.file| to include the target state progress coordinate value(s). (p. 12) 
+\item \textbf{Calculate your initial progress coordinate value(s).}
+You can either set us this calculation manually, placing the contents in \textbf{pcoord.init} (see Basic Tutorial), or edit \verb|get_pcoord.sh| to calculate it (see Intermediate Tutorial) before those values are passed to WESTPA. (pp. 13-14)
+\end{enumerate}
+\item Set.
+\begin{enumerate}
+\item \textbf{Initialize the WE simulation.}  This is done by running \verb|init.sh|.
+\item \textbf{Prepare to run the WE simulation.} Edit \verb|runseg.sh| to run dynamics, calculate the progress coordinate and store any auxiliary data. (p. 14)
+\end{enumerate}
+\item Go!
+\begin{enumerate}
+\item \textbf{Run the WE simulation.} 
+To execute \verb|w_run| on your cluster, run an appropriate submission script (e.g., using Slurm).
+\item \textbf{Monitor simulation progress.}
+Backup your \verb|west.h5| file and use \verb|w_pdist| and \verb|plothist| to calculate and visualize probability distributions (pp. 14). 
+If your WE simulation is not making any bin-to-bin transitions stop the simulation and restart the simulation with a shorter $\tau$, adjustments in the progress coordinate, and/or adjustments in bin spacings (pp. 16-17). 
+\item \textbf{Assess simulation convergence.} 
+Plot the average flux into the target state (or other observable of interest) as a function of WE iteration (p. 15).
+\end{enumerate}
+\item Analyze.
+\begin{enumerate}
+\item \textbf{Progress coordinate and auxiliary data.} 
+Progress coordinate and auxiliary datasets are stored in the \verb|west.h5| file and can be extracted using \verb|hdfview| or the \verb|h5py| Python package. 
+The \verb|w_ipa| tool can be used to calculate kinetic observables (e.g. rate constants), which are outputted to the \verb|assign.h5| and \verb|direct.h5 files|. (p. 15) 
+To plot a dataset, use a plotting tool such as \verb|matplotlib|.
+\item \textbf{Visualize a successful trajectory.}
+Start by running \verb|w_succ| to obtain the WE iteration and segment of the final conformation from the successful trajectory (p. 14). 
+Then, run \verb|w_trace| to obtain the series of conformations in the trajectory by tracing backwards from the final to initial conformations of the trajectory. 
+The resulting series of conformations can then be visualized using a software package such as VMD. (p. 15) 
+\end{enumerate}
+\end{enumerate}
+\end{comment}
+
+
+\newpage
+\onecolumn
+\begin{center}
+\begin{LARGE}
+    \textbf{PROTOCOL FOR RUNNING WE SIMULATIONS}
+\end{LARGE}
+\end{center}
+\renewcommand{\theenumi}{\Roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{(\theenumii)}
+\begin{enumerate}
+\item Ready.
+\begin{enumerate}
+\item \textbf{Organize files into directories.} 
+The initial coordinate file(s) should go in \verb|bstates| and the topology and MD input files should go in \verb|common_files|. 
+In addition, any scripts needed to calculate the progress coordinate should be placed in \verb|common_files|. (\textbf{Section \ref{tut:basic-nacl-3}})
+\item \textbf{Prepare the system environment.}  
+Edit \verb|env.sh| accordingly for your system environment, i.e. source any files needed to set up the dynamics engine and set variables equal to the full paths of programs (see \textbf{Section \ref{tut:basic-nacl-3}}). 
+\item \textbf{Specify WE parameters.}  
+In the \verb|west.cfg| file, specify the number of WE iterations that will be carried out, progress coordinate, number of progress coordinate values that will be recorded per iteration, bin spacing, and number of trajectories per bin (see \textbf{Section \ref{intro:general-guidelines}}; \textbf{Table \ref{intro:table2}}).  
+If a nested coordinate is desired, the bin spacing should be defined in \verb|system.py| (See point 4 in \textbf{Section \ref{intro:general-guidelines}}).  
+The $\tau$ value is specified in the main input file for dynamics propagation (in \verb|common_files/|) through the total number of MD steps.  
+\item \textbf{Set up calculations of auxiliary data.} 
+Decide if you want to store any data that is auxiliary to the progress coordinate and add the corresponding datasets to \verb|west.cfg|.
+\item \textbf{Specify whether to run equilibrium or steady-state WE.}
+Edit the \verb|init.sh| file to include \verb|$TSTATE_ARGS| if you plan to run steady-state WE.  
+Also, edit \verb|tstate.file| to include the target state progress coordinate value(s). (\textbf{Section \ref{tut:basic-nacl-3}}) 
+\item \textbf{Calculate your initial progress coordinate value(s).}
+You can either set us this calculation manually, placing the contents in \verb|pcoord.init| (see \textbf{Basic Tutorial \ref{tut:nacl-basic}}), or edit \verb|get_pcoord.sh| to calculate it (see \textbf{Intermediate Tutorial \ref{tut:p53-int}}) before those values are passed to WESTPA. (\textbf{Section \ref{tut:basic-nacl-3}})
+\end{enumerate}
+\item Set.
+\begin{enumerate}
+\item \textbf{Initialize the WE simulation.}  This is done by running \verb|init.sh|.
+\item \textbf{Prepare to run the WE simulation.} Edit \verb|runseg.sh| to run dynamics, calculate the progress coordinate and store any auxiliary data. (\textbf{Section \ref{tut:basic-nacl-4}})
+\end{enumerate}
+\item Go!
+\begin{enumerate}
+\item \textbf{Run the WE simulation.} 
+To execute \verb|w_run| on your cluster, run an appropriate submission script (e.g., using Slurm).
+\item \textbf{Monitor simulation progress.}
+Backup your \verb|west.h5| file and use \verb|w_pdist| and \verb|plothist| to calculate and visualize probability distributions (\textbf{Section \ref{tut:basic-nacl-monitoring}}). 
+If your WE simulation is not making any bin-to-bin transitions stop the simulation and restart the simulation with a shorter $\tau$, adjustments in the progress coordinate, and/or adjustments in bin spacings (\textbf{Tutorial \ref{tut:p53-int-prep}}). 
+\item \textbf{Assess simulation convergence.} 
+Plot the average flux into the target state (or other observable of interest) as a function of WE iteration (\textbf{Section \ref{tut:basic-nacl-plot}}).
+\end{enumerate}
+\item Analyze.
+\begin{enumerate}
+\item \textbf{Progress coordinate and auxiliary data.} 
+Progress coordinate and auxiliary datasets are stored in the \verb|west.h5| file and can be extracted using \verb|hdfview| or the \verb|h5py| Python package. 
+The \verb|w_ipa| tool can be used to calculate kinetic observables (e.g. rate constants), which are outputted to the \verb|assign.h5| and \verb|direct.h5 files|. (\textbf{Section \ref{tut:analysis_adv_w_ipa}}) 
+To plot a dataset, use a plotting tool such as \verb|matplotlib|.
+\item \textbf{Visualize a successful trajectory.}
+Start by running \verb|w_succ| to obtain the WE iteration and segment of the final conformation from the successful trajectory (Section \ref{tut:basic-nacl-monitoring}). 
+Then, run \verb|w_trace| to obtain the series of conformations in the trajectory by tracing backwards from the final to initial conformations of the trajectory. 
+The resulting series of conformations can then be visualized using a software package such as VMD. (\textbf{Section \ref{tut:basic-nacl-plot}})
+\end{enumerate}
+\end{enumerate}
+
+\newpage
+\begin{center}
+\begin{LARGE}
+    \textbf{CHECKLIST FOR TROUBLESHOOTING WE SIMULATIONS}
+\end{LARGE}
+\end{center}
+
+\renewcommand{\labelenumi}{}
+\renewcommand{\labelenumii}{$\square$}
+\begin{enumerate}
+\item \textbf{Files for Dynamics Propagation}
+\begin{enumerate}
+\item Have you set up all of the files for propagating the dynamics using your dynamics engine (e.g. Amber, OpenMM)? 
+\end{enumerate}
+\item \textbf{System Configuration (}\verb|west.cfg| \textbf{file)}
+\begin{enumerate}
+\item Is \verb|pcoord_len| set to the number of data points that corresponds to the frequency with which the dynamics engine outputs the progress coordinate? Note: Many MD engines (e.g. Gromacs) output the initial point (i.e. zero). 
+\item Are the bins in the expected positions? You can easily view the positions of the bins using a Python interpreter.
+\end{enumerate}
+\item \textbf{Initializing the simulation (}\verb|init.sh| \textbf{file)} 
+\begin{enumerate}
+\item Is the directory structure for the trajectory output files consistent with specifications in the \verb|west.cfg| file? 
+\item Are the basis (\verb|bstate|) states, and if applicable, target states (\verb|tstate|), specified correctly?
+\end{enumerate}
+\item \textbf{Calculating the progress coordinate for initial states (}\verb|get_pcoord.sh| \textbf{file)}
+\begin{enumerate}
+\item Ensure that the procedure to extract the progress coordinate works by calculating your progress coordinate manually for one (or more) basis state files. 
+\item Examine structure(s) of the initial states using visualization software (e.g. VMD, PyMOL) to verify that the structure(s) match the progress coordinate in the H5 file 
+\end{enumerate}
+\item \textbf{Segment implementation (}\verb|runseg.sh|\textbf{)}
+\begin{enumerate}
+\item Ensure that the progress coordinate is being calculated correctly by manually running a single dynamics segment of length $\tau$ for a single trajectory walker. 
+Check that your analysis pipeline works using the output from the single dynamics segment. 
+\item Are you feeding the information (e.g., coordinates, velocities) that is required for continuing trajectories? 
+\item Are you including the parent coordinate file at the beginning of your analysis?
+\item Are you imaging the trajectory before calculating the progress coordinate?  Or equivalently using a function that can image your trajectory on-the-fly?
+\item Check the \verb|seg_log| file to further ensure correct calculation of the progress coordinate. 
+\item Ensure you are saving everything you might need to restart your simulation later on, including random seeds for stochastic dynamics as auxiliary data in the H5 file. 
+\end{enumerate}
+\item \textbf{Storage}
+\begin{enumerate}
+\item WESTPA simulations can generate a lot of data! Make sure you have enough space before starting the simulation.
+\item Do you have a plan for backing up the simulation? 
+Consider using tar to compress files from past iterations for easier backup. 
+Keep file sizes =<300 GB. 
+\item For all-atom explicit water simulations, it's a good idea to save a separate copy of your trajectories without water coordinates for more efficient analysis.
+\end{enumerate}
+\item \textbf{Simulation Progress (}\verb|west.h5| \textbf{file)}
+\begin{enumerate}
+\item Check that the first WE iteration has been initialized by typing \verb|h5ls west.h5/iterations| into the command line.  
+You should see \verb|iter_00000001| in the output.
+\item In addition, the progress coordinate should be initialized.
+Check this by using the command 
+
+\verb|h5ls -d west.h5/iterations/iter_00000001/pcoord|.
+If all is well, the output will show that the array is populated by zeros and the first point is the value calculated by \verb|get_pcoord.sh|.
+\end{enumerate}
+\item \textbf{Analysis}
+\begin{enumerate}
+\item If you are running analysis on a shared computing resource, use the \verb|--serial| flag with the analysis tool. 
+Otherwise, many of the included tools default to parallel mode (e.g., \verb|w_assign|), which will create as many Python threads as there are CPU cores available on your resource.
+\end{enumerate}
+\end{enumerate}
