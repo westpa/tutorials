@@ -10,3 +10,9 @@
 	path = old_tutorials/advanced_tutorials/WESTPA2
 	url = https://github.com/westpa/westpa2_tutorials
         branch = westpa2
+[submodule "tutorials7.1-7.4"]
+	path = tutorials7.1-7.4
+	url = https://github.com/westpa/westpa_tutorials
+[submodule "tutorials7.5-7.10"]
+	path = tutorials7.5-7.10
+	url = https://github.com/westpa/westpa2_tutorials
