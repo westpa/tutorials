@@ -2,7 +2,7 @@
 
 This is the landing page/hub for all [WESTPA Tutorials](https://github.com/westpa/westpa/wiki/tutorials). If you are here to learn how to use WESTPA, you are at the right place!
 
-If you are new to WESTPA, start off our suite of tutorials for WESTPA 2.0 \([Bogetti et al. 2023](https://doi.org/10.33011/livecoms.5.1.1655 )\). [Tutorials 7.1-7.4](https://github.com/westpa/westpa_tutorials) are our basic and intermediate tutorials. [Tutorials 7.4-7.10](https://github.com/westpa/westpa2_tutorials) are our advanced tutorials.
+If you are new to WESTPA, start off our suite of tutorials for WESTPA 2.0 \([Bogetti et al. 2023](https://doi.org/10.33011/livecoms.5.1.1655 )\). [Tutorials 7.1-7.4](https://github.com/westpa/westpa_tutorials) are our basic and intermediate tutorials. [Tutorials 7.5-7.10](https://github.com/westpa/westpa2_tutorials) are our advanced tutorials.
 
 ### Updating this repository
 
