@@ -4,7 +4,7 @@ This is the landing page/hub for all [WESTPA Tutorials](https://github.com/westp
 
 If you are new to WESTPA, start off our suite of tutorials for WESTPA 2.0 \([Bogetti et al. 2023](https://doi.org/10.33011/livecoms.5.1.1655 )\). [Tutorials 7.1-7.4](https://github.com/westpa/westpa_tutorials) are our basic and intermediate tutorials. [Tutorials 7.5-7.10](https://github.com/westpa/westpa2_tutorials) are our advanced tutorials.
 
-If you decide to clone this repository using git in commandline, make sure to use `git clone --recursive https://github.com/westpa/tutorials` so you also clone the tutorial files submodules.
+If you decide to clone this repository using git in the command line, make sure to use `git clone --recursive https://github.com/westpa/tutorials` so you also clone the tutorial files submodules.
 
 ### Updating this repository
 
